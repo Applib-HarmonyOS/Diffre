@@ -17,7 +17,6 @@
 package io.github.rakshakhegde.diffre;
 
 import io.github.rakshakhegde.diffre.DiffreView;
-import io.github.rakshakhegde.diffre.DiffreViewApi1;
 import ohos.aafwk.ability.delegation.AbilityDelegatorRegistry;
 import ohos.agp.components.Attr;
 import ohos.agp.components.AttrSet;
@@ -29,7 +28,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class TestDiffreViewApi1 {
+public class TestDiffreView {
     Context context = AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
     AttrSet attrSet = new AttrSet() {
         @Override
@@ -54,20 +53,20 @@ public class TestDiffreViewApi1 {
     };
     @Test
     public void testInitBasic() {
-        DiffreViewApi1 diffreViewApi1 = new DiffreViewApi1(context);
-        assertNotNull(diffreViewApi1);
+        DiffreView diffreView = new DiffreView(context);
+        assertNotNull(diffreView);
     }
     @Test
     public void testInitWithAttrs() {
-        DiffreViewApi1 diffreViewApi1 = new DiffreViewApi1(context, attrSet);
-        assertNotNull(diffreViewApi1);
+        DiffreView diffreView = new DiffreView(context, attrSet);
+        assertNotNull(diffreView);
     }
     @Test
     public void testOnEstimateSize() {
         // Internally calls computePaths(), which calls computeCroppedProgressPath()
         // and computeCroppedTextPath()
 
-        DiffreView diffreView = new DiffreViewApi1(context, attrSet);
+        DiffreView diffreView = new DiffreView(context, attrSet);
         diffreView.setProgress(0.5F);
         assertTrue(diffreView.onEstimateSize(100, 100));
     }

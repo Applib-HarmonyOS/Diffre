@@ -5,7 +5,7 @@ Diffre is an application that shows how to change text color based on background
 
 # Source
 
-Inspired by the Android library Diffre (v1.0, 14 Oct 2018) by Rakshak Hegde ([Email](mailto:rakshakhegde@gmail.com) | [Twitter](https://twitter.com/rakshakhegde)):
+Inspired by the library Diffre (v1.0, 14 Oct 2018) by Rakshak Hegde ([Email](mailto:rakshakhegde@gmail.com) | [Twitter](https://twitter.com/rakshakhegde)):
 
 https://github.com/rakshakhegde/Diffre
 
@@ -38,8 +38,8 @@ Refer to the [ability_main.xml](entry/src/main/resources/base/layout/ability_mai
 Create a Progress Text Component in your layout file by adding the following XML tag:
 
 ```xml
-<io.github.rakshakhegde.diffre.DiffreViewApi1
-            ohos:id="$+id:fillShapeViewApi1"
+<io.github.rakshakhegde.diffre.DiffreView
+            ohos:id="$+id:progress_text_display"
             ohos:height="match_parent"
             ohos:width="match_parent"
             ohos:layout_alignment="center"

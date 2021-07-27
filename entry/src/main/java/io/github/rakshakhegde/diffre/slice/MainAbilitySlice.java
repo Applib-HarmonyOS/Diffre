@@ -29,30 +29,30 @@ import io.github.rakshakhegde.diffre.ResourceTable;
 public class MainAbilitySlice extends AbilitySlice {
 
     Slider seekbar;
-    DiffreView diffreViewApi1;
+    DiffreView diffreView;
 
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_main);
 
-        seekbar = (Slider) findComponentById(ResourceTable.Id_seekBar);
-        diffreViewApi1 = (DiffreView) findComponentById(ResourceTable.Id_fillShapeViewApi1);
+        seekbar = (Slider) findComponentById(ResourceTable.Id_seek_bar);
+        diffreView = (DiffreView) findComponentById(ResourceTable.Id_progress_text_display);
 
-        if (diffreViewApi1 != null) {
+        if (diffreView != null) {
             float progress;
             if (seekbar != null) {
                 progress = seekbar.getProgress();
             } else {
                 progress = 60F;
             }
-            diffreViewApi1.setProgress(progress / 100F);
+            diffreView.setProgress(progress / 100F);
         }
         if (seekbar != null) {
             seekbar.setValueChangedListener(new Slider.ValueChangedListener() {
                 @Override
                 public void onProgressUpdated(Slider seekBar, int progress, boolean fromUser) {
-                    diffreViewApi1.setProgress(progress / 100F);
+                    diffreView.setProgress(progress / 100F);
                 }
 
                 @Override

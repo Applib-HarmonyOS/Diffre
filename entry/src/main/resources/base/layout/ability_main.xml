@@ -19,15 +19,15 @@
             ohos:text_size="18fp"
             ohos:padding="8vp"
             />
-        <io.github.rakshakhegde.diffre.DiffreViewApi1
-            ohos:id="$+id:fillShapeViewApi1"
+        <io.github.rakshakhegde.diffre.DiffreView
+            ohos:id="$+id:progress_text_display"
             ohos:height="match_parent"
             ohos:width="match_parent"
             ohos:layout_alignment="center"
             ohos:top_margin="8vp"/>
     </DirectionalLayout>
     <Slider
-        ohos:id="$+id:seekBar"
+        ohos:id="$+id:seek_bar"
         ohos:height="match_content"
         ohos:width="match_parent"
         ohos:align_parent_bottom="true"

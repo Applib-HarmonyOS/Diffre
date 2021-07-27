@@ -7,6 +7,7 @@ import ohos.agp.components.Component;
 import ohos.agp.render.Canvas;
 import ohos.agp.render.Paint;
 import ohos.agp.render.Path;
+import ohos.agp.render.Region;
 import ohos.agp.utils.Color;
 import ohos.agp.utils.Rect;
 import ohos.agp.utils.RectFloat;
@@ -15,9 +16,12 @@ import ohos.app.Context;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Works with any background. Also refer to concrete implementation {@link DiffreViewApi1}
+ * DiffreView is a UI Component used to display progress text bars.
+ * Works with any background.
+ *
+ * <p>Created by rakshakhegde on 16/02/17.</p>
  */
-public abstract class DiffreView extends Component implements Component.EstimateSizeListener, Component.DrawTask {
+public class DiffreView extends Component implements Component.EstimateSizeListener, Component.DrawTask {
 
     int width;
     int height;
@@ -52,16 +56,26 @@ public abstract class DiffreView extends Component implements Component.Estimate
     private final int textPadding;
     private final Rect textBounds = new Rect();
 
+    final Region textRegion = new Region();
+    final Region progressRegion = new Region();
+    final Region region = new Region();
 
-    protected DiffreView(Context context) {
+    public DiffreView(Context context) {
         this(context, null);
     }
 
-    protected DiffreView(Context context, @Nullable AttrSet attrs) {
+    public DiffreView(Context context, @Nullable AttrSet attrs) {
         this(context, attrs, 0);
     }
 
-    protected DiffreView(Context context, @Nullable AttrSet attrs, int defStyleId) {
+    /**
+     * Create an instance of the DiffreView class, a UI Component used to display progress text bars.
+     *
+     * @param context - Indicates the application context.
+     * @param attrs - Indicates the attribute set.
+     * @param defStyleId - Indicates the resource ID of the default theme.
+     */
+    public DiffreView(Context context, @Nullable AttrSet attrs, int defStyleId) {
         super(context, attrs, defStyleId);
 
 
@@ -174,8 +188,33 @@ public abstract class DiffreView extends Component implements Component.Estimate
         computeCroppedTextPath();
     }
 
-    public abstract void computeCroppedProgressPath();
+    /**
+     * Constructs the Path object required to represent the the filled portion of the progress bar.
+     */
+    public void computeCroppedProgressPath() {
+        region.setRect(new Rect(0, 0, (int) (width * percent), height));
 
-    public abstract void computeCroppedTextPath();
+        // NOTE Below operations are not working as expected
+        progressRegion.setPath(progressStrokePath, region); // INTERSECT
+        textRegion.setPath(textPath, region);
+
+        progressRegion.op(textRegion, Region.Op.DIFFERENCE); // DIFFERENCE
+
+        croppedProgressPath.rewind();
+        progressRegion.getBoundaryPath(croppedProgressPath);
+    }
+
+    /**
+     * Constructs the Path object required to represent the the unfilled portion of the progress bar.
+     */
+    public void computeCroppedTextPath() {
+        region.setRect(new Rect((int) (width * percent), 0, width, height));
+
+        // NOTE Below operation is not working as expected
+        textRegion.setPath(textPath, region); // INTERSECT
+
+        croppedTextPath.rewind();
+        textRegion.getBoundaryPath(croppedTextPath);
+    }
 
 }
