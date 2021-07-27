@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "Diffre"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Sample App Entry Feature Ability"
+    },
+    {
+      "name": "progress_text_bar",
+      "value": "Progress Text Bar"
+    }
+  ]
+}

@@ -1,36 +1,64 @@
-[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=58a68543ae672601008b2e45&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/58a68543ae672601008b2e45/build/latest?branch=master)
-
 # Diffre
 *pronounced - Differ*
 
-Diffre is a sample Android application that shows how to change text color based on background.
+Diffre is an application that shows how to change text color based on background. This can be used to create progress bars overlaid by text, custom animations involving complex shapes, and much more. It works on the simple principle of color difference: The colour of the text is subtracted from that of the background to maintain readability even as the background is changed dynamically. The code of this library is modular and easily extensible as per requirement.
 
-This sample application exposes two possible implementations:
+# Source
 
-* A `Path`-based implementation that requires API level 19
-* A `Region`-based implementation that requires API level 1
+Inspired by the library Diffre (v1.0, 14 Oct 2018) by Rakshak Hegde ([Email](mailto:rakshakhegde@gmail.com) | [Twitter](https://twitter.com/rakshakhegde)):
 
-*Heavily influenced from [Romain Guy's Medium article](https://medium.com/@romainguy/a-better-underline-for-android-90ba3a2e4fb#.v4xblse45)*
+https://github.com/rakshakhegde/Diffre
 
-<p align="center">
-<img alt="demo gif" src="ART/demo.gif" width=300 />
-</p>
+## Features
+* A progress bar overlaid on a text display which dynamically changes the colour of the text as the progress indicator changes.
+* A complete and easily extensible implementation using `Region` API of HarmonyOS.
 
-<p align="center">
-<img alt="demo gif" src="ART/screenshot.png" width=300 />
-</p>
+<img alt="Diffre Sample GIF" src="images/diffre_sample_gif.gif" width = 300/>
 
-This project was built because of this [Stack OverFlow question](http://stackoverflow.com/questions/42246509/fill-shape-with-text-with-two-different-color)
+## Dependency
+1. For using Diffre module in sample app, include the source code and add the below dependencies in entry/build.gradle to generate hap/support.har.
+```
+	dependencies {
+		implementation project(':diffre')
+        	testCompile 'junit:junit:4.12'
+	}
+```
+2. For using Diffre module in separate application using har file, add the har file in the entry/libs folder and add the dependencies in entry/build.gradle file.
+```
+	dependencies {
+		implementation fileTree(dir: 'libs', include: ['*.har'])
+		testCompile 'junit:junit:4.12'
+	}
 
-Check out this other library I wrote: [LastPagerAdapter](https://github.com/rakshakhegde/LastPagerAdapter)
+```
+## Usage
 
-## Limitations
-* Even though Region API works from API 1+, many devices I've encountered don't render it unless `layerType="software"` is specified. So this effectively makes Region API useful only from API 11.
+Refer to the [ability_main.xml](entry/src/main/resources/base/layout/ability_main.xml) file in the entry sample app.
 
-## Contact
-[Email](mailto:rakshakhegde@gmail.com) | [Twitter](https://twitter.com/rakshakhegde)
+Create a Progress Text Component in your layout file by adding the following XML tag:
 
-## License
+```xml
+<io.github.rakshakhegde.diffre.DiffreView
+            ohos:id="$+id:progress_text_display"
+            ohos:height="match_parent"
+            ohos:width="match_parent"
+            ohos:layout_alignment="center"
+            ohos:top_margin="8vp"/>
+```
+
+To further customize this Component, refer to [DiffreView.java](diffre/src/main/java/io/github/rakshakhegde/diffre/DiffreView.java) where the following parameters may be customized:
+
+* `PAINT_TEXT_SIZE`: Size of the display text in fp
+* `PAINT_TEXT_PADDING`: Padding of the display text from the enclosing box in vp
+* `PAINT_RADIUS`: Radius of the bounding rectangular box in vp
+* `STROKE_WIDTH`: Thickness of the stroke used to display the text and bounding box in px
+* `DISPLAY_COLOR`: Integer value of the Color used to display background and text. Use `Color.getIntColor(String)` to convert a String representation of color to the integer representation.
+
+## Future Work
+* As of SDK version 5, the `Path`-based implementation in the original library is not included. This means the given implementation is without the associated anti-aliasing feature. When a suitable provisions for the same are made available in future releases of the HarmonyOS API, this feature will be added.
+
+License
+-------
 ```txt
 Copyright 2016 Rakshak Hegde
 
