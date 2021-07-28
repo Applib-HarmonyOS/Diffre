@@ -4,7 +4,7 @@
 # Diffre
 *pronounced - Differ*
 
-Diffre is an application that shows how to change text color based on background. This can be used to create progress bars overlaid by text, custom animations involving complex shapes, and much more. It works on the simple principle of color difference: The colour of the text is subtracted from that of the background to maintain readability even as the background is changed dynamically. The code of this library is modular and easily extensible as per requirement.
+Diffre demonstrates how to change text color based on background. This can be used to create progress bars overlaid by text, custom animations involving complex shapes, and much more. It works on the simple principle of color difference: The colour of the text is subtracted from that of the background to maintain readability even as the background is changed dynamically. The code of this library is modular and easily extensible as per requirement.
 
 # Source
 
@@ -34,6 +34,15 @@ https://github.com/rakshakhegde/Diffre
 	}
 
 ```
+3. For using Diffre from a remote repository in separate application, add the below dependencies in entry/build.gradle file.
+```
+	dependencies {
+		implementation 'dev.applibgroup:diffre:1.0.0'
+		testCompile 'junit:junit:4.12'
+	}
+
+```
+
 ## Usage
 
 Refer to the [ability_main.xml](entry/src/main/resources/base/layout/ability_main.xml) file in the entry sample app.
